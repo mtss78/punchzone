@@ -14,7 +14,7 @@ class Commentaire
     protected ?int $userId;
 
     public function __construct(
-        ?int $id,
+        ?int $id, 
         ?string $contenu,
         ?string $dateCommentaire,
         ?int $articleId,
