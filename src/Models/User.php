@@ -25,7 +25,7 @@ class User
     public function save(): bool
     {
         $pdo = DataBase::getConnection();
-        $sql = "INSERT INTO user (id,pseudo,mail,password,score,id_role) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO user (id,pseudo,mail,password,id_role) VALUES (?,?,?,?,?)";
         $statement = $pdo->prepare($sql);
         return $statement->execute([$this->id, $this->pseudo, $this->mail, $this->password, $this->id_role]);
     }
@@ -38,9 +38,9 @@ class User
         $statement->execute([$mail]);
         $row = $statement->fetch(PDO::FETCH_ASSOC);
         if ($row['id_role'] == 1) {
-            return new UserAdmin($row['id'], $row['pseudo'], $row['mail'], $row['password'], $row['id_role']);
+            return new User($row['id'], $row['pseudo'], $row['mail'], $row['password'], $row['id_role']);
         } elseif ($row['id_role'] == 2) {
-            return new UserRole($row['id'], $row['pseudo'], $row['mail'], $row['password'], $row['id_role']);
+            return new User($row['id'], $row['pseudo'], $row['mail'], $row['password'], $row['id_role']);
         } else {
             return null;
         }
@@ -60,21 +60,22 @@ class User
         }
     }
 
-    public function getKids()
+    public function getUsersByRole(int $roleId): array
     {
         $pdo = DataBase::getConnection();
-        $sql = "SELECT `user`.`id`, `user`.`pseudo` FROM `user` WHERE `user`.`id_role` = 2";
+        $sql = "SELECT `user`.`id`, `user`.`pseudo` FROM `user` WHERE `user`.`id_role` = ?";
         $statement = $pdo->prepare($sql);
-        $statement->execute();
-        $resultKids = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $kids = [];
-        foreach ($resultKids as $row) {
-            $kid = new User($row['id'], $row['pseudo'], null, null, null, null);
-            $kids[] = $kid;
+        $statement->execute([$roleId]);
+        $resultUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+        $users = [];
+        foreach ($resultUsers as $row) {
+            $user = new User($row['id'], $row['pseudo'], null, null, null);
+            $users[] = $user;
         }
-        return $kids;
+        return $users;
     }
-
+    
     public function getId(): ?int
     {
         return $this->id;

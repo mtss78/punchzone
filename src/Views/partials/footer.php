@@ -10,14 +10,7 @@
           <div class="col-xs-6 col-md-3">
             <h6>Nos pages</h6>
             <ul class="footer-links">
-              <li><a href="#"></a></li>
-            </ul>
-          </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Quick Links</h6>
-            <ul class="footer-links">
-              <li><a href="#">About Us</a></li>
+              <li><a href="/src/Views/home.view.php"></a>Acceuil</li>
             </ul>
           </div>
         </div>
