@@ -1,85 +1,114 @@
 <?php
 require_once(__DIR__ . '/partials/head.php');
 ?>
-    <div class="img_principal">
-        <img src="/public/img/imgheader.jpeg" class="img-fluid" alt="...">
+
+<!--Hey! This is the original version
+of Simple CSS Waves-->
+
+<div class="header">
+
+<!--Content before waves-->
+<div class="inner-header flex">
+<!--Just the logo.. Don't mind this-->
+</div>
+
+<!--Waves Container-->
+<div>
+<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+<defs>
+<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+</defs>
+<g class="parallax">
+<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+<use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+<use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+</g>
+</svg>
+</div>
+<!--Waves end-->
+
+</div>
+<!--Header ends-->
+
+<section class="contenair_article">
+    <div class="title_article">
+        <h1>LES DERNIÈRES NEWS </h1>
+        <div class="custom_line"></div>
     </div>
-
-    <section class="fighters">
-        <h2>LES COMBATTANTS</h2>
-        <div class="fighters-grid">
-            <img src="/public/img/islam.jpg" alt="islam">
-            <img src="/public/img/aspinall.jpg" alt="aspinall">
-            <img src="/public/img/topuria.jpg" alt="topuria">
-            <img src="/public/img/edwards.jpg" alt="edwards">
-            <img src="/public/img/jon jones.jpg" alt="Jon Jones">
-            <img src="/public/img/merab.jpg" alt="merab">
-            <img src="/public/img/volkanovski.jpg" alt="volkanovski">
-            <img src="/public/img/muhammad.jpg" alt="belel muhammad">
-            <img src="/public/img/perreira.jpg" alt="alex perreira">
-            <img src="/public/img/plesus.jpg" alt="plessis">
-        </div>
-        <div class="more-button">
-            <button>PLUS DE COMBATTANTS</button>
-        </div>
-    </section>
-    <header>
-        <h1>Boxing News</h1>
-    </header>
-
-    <div class="container">
-        <div class="grid">
-            <!-- Main Featured Article -->
-            <div class="featured">
-                <img src="/public/img/aspinall.jpg" alt="Beterbiev vs Bivol">
-                <div class="featured-content">
-                    <h2>BETERBIEV VS BIVOL : TOUT UN DUEL EN PERSPECTIVE !</h2>
-                    <p>Ce samedi au Kingdom Arena de Riyadh en Arabie-Saoudite...</p>
-                </div>
-            </div>
-
-            <!-- Other Articles -->
-            <div class="article">
-                <img src="https://via.placeholder.com/400x200" alt="Jai Opetaia">
-                <div class="article-content">
-                    <h3>JAI OPETAIA CONSERVE SON TITRE MONDIAL</h3>
-                    <p>Aujourd'hui à Broadbeach en Australie...</p>
-                </div>
-            </div>
-
-            <div class="article">
-                <img src="https://via.placeholder.com/400x200" alt="Top Ten 2024">
-                <div class="article-content">
-                    <h3>TOP TEN 2024</h3>
-                    <p>Nous vous présentons la 29e édition...</p>
-                </div>
-            </div>
-
-            <div class="article">
-                <img src="https://via.placeholder.com/400x200" alt="Thierry Jacob">
-                <div class="article-content">
-                    <h3>L'ADIEU À THIERRY JACOB</h3>
-                    <p>En ce 27 décembre 2024, l'église...</p>
-                </div>
-            </div>
-
-            <div class="article">
-                <img src="https://via.placeholder.com/400x200" alt="Iglesias">
-                <div class="article-content">
-                    <h3>IGLESIAS POURSUIT SA DOMINATION !</h3>
-                    <p>Dans la finale du gala disputé au Cabaret...</p>
-                </div>
-            </div>
-
-            <div class="article">
-                <img src="https://via.placeholder.com/400x200" alt="Beterbiev Champion">
-                <div class="article-content">
-                    <h3>BETERBIEV CHAMPION INCONTESTÉ</h3>
-                    <p>Dans un combat enlevant et serré...</p>
-                </div>
-            </div>
-        </div>
+    <div class="band">
+    <div class="item-1">
+        <a href="#" class="card">
+        <div class="thumb" style="background-image: url(/public/img/pfl-abdoul.jpeg);"></div>
+        <article>
+            <h1>PFL – Abdoul Abdouraguimov fait son grand retour contre Staropoli</h1>
+            <span>Mary Winkler</span>
+        </article>
+        </a>
     </div>
+    <div class="item-2">
+        <a href="#" class="card">
+        <div class="thumb" style="background-image: url(/public/img/benoit-saint-denis-tko.jpg);"></div>
+        <article>
+            <h1>UFC Paris - Benoît Saint-Denis s'incline sur TKO après un arrêt du docteur</h1>
+            <p>Benoît Saint Denis s'est incliné face à Renato Moicano sur TKO, lors de l'UFC Paris 3 le 28 septembre 2024. Le combattant français, trop touché aux yeux, a été arrêté par le médecin. </p>
+            <span>Harry Brignull</span>
+        </article>
+        </a>
+    </div>
+    <div class="item-3">
+        <a href="#" class="card">
+        <div class="thumb" style="background-image: url(/public/img/ufc-paris-morgan-charriere-ko.jpg);"></div>
+        <article>
+            <h1>UFC Paris - Morgan Charrière claque un énorme KO sur crochet gauche</h1>
+            <p> Le Pirate évoluait de nouveau devant son public à Paris. Finalement, Morgan Charrière claque un énorme KO sur un crochet. </p>
+            <span>Melody Nieves</span>
+        </article>
+        </a>
+    </div>
+    <div class="item-4">
+        <a href="#" class="card">
+        <div class="thumb" style="background-image: url(/public/img/benoit-saint-denis-forfait.jpg);"></div>
+        <article>
+            <h1>UFC Paris 3 - Benoit Saint-Denis vs. Renato Moicano : tous les résultats</h1>
+            <p>Devant leur public, les combattants français de l’UFC auront à cœur de briller comme les années précédentes.</p>
+            <span>Kezz Bracey</span>
+        </article>
+        </a>
+    </div>
+    <div class="item-5">
+        <a href="#" class="card">
+        <div class="thumb" style="background-image: url(/public/img/makhachev-moicano-premier-round.jpg);"></div>
+        <article>
+            <h1>UFC 311 – Islam Makhachev roule sur Moicano au premier round</h1>
+            <p>Événement principal d’une carte chamboulée. Finalement, Islam Makhachev roule sur Moicano au premier round.</p>
+            <span>Rose</span>
+        </article>
+        </a>
+    </div>
+    <div class="item-6">
+        <a href="#" class="card">
+        <div class="thumb" style="background-image: url(/public/img/pereira-ankalaev-ufc-313.jpg);"></div>
+        <article>
+            <h1>Alex Pereira vs Magomed Ankalaev, officialisé pour l’UFC 313</h1>
+            <p>Malgré les rumeurs, le choc va avoir lieu. En effet, Alex Pereira vs Magomed Ankalaev est officialisé pour l’UFC 313.</p>
+            <span>Marie Gardiner</span>
+        </article>
+        </a>
+    </div>
+    <div class="item-7">
+        <a href="#" class="card">
+        <div class="thumb" style="background-image: url(/public//img/dana-white-bellator-pfl.jpeg);"></div>
+        <article>
+            <h1>L’UFC bientôt diffusé sur Netflix ? Le boss répond</h1>
+            <p>Ted Sarandos, co-PDG de Netflix, a laissé place aux doutes concernant une éventuelle arrivée de l’UFC sur la plateforme.</p>
+            <span>Kendra Schaefer</span>
+        </article>
+        </a>
+    </div>
+    </div>
+</section>
 <?php
 require_once(__DIR__ . "/partials/footer.php");
 ?>

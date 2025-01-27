@@ -11,62 +11,85 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark">
-      <!-- Logo -->
-      <a class="navbar-brand" href="/">
-        <img src="/public/img/logo.pz.png" alt="Logo" width="50" height="50">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Links -->
-      <div class="collapse navbar-collapse fw-bold me-3" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Article</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Classements</a>
-          </li>
-        </ul>
-        <!-- Buttons -->
-        <div class="ms-3">
-          <a href="/login" class="btn btn-outline-light me-2">Connexion</a>
-          <a href="/register" class="btn btn-light">Inscription</a>
-        </div>
-      </div>
-  </nav>
-                <?php
-            if(isset($_SESSION['user'])){
-                ?>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Article</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Classements</a>
-                </li>
-                <a href="#" class="btn btn-outline-light me-2">Connexion</a>
-                <a href="#" class="btn btn-light">Inscription</a>
+    <nav class="navbar navbar-expand-lg navbar">
+        <!-- Logo -->
+        <a class="navbar-brand" href="/">
+            <img src="/public/img/logo.pz.png" alt="Logo" width="50" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
                 <?php
-                if($_SESSION['user']['role']== "Admin"){
-                    ?>
-                    
+                if (isset($_SESSION['user'])) {
+                ?>
+                    <!-- Liens pour les utilisateurs connectés -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Classements</a>
+                    </li>
+                    <!-- Bouton de déconnexion -->
+                    <li class="nav-item">
+                        <a href="/logout" class="btn btn-outline-light me-2">Déconnexion</a>
+                    </li>
+
+                    <!-- Vérification du rôle Admin -->
                     <?php
+                    if ($_SESSION['user']['idRole'] == "Admin") {
+                    ?>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Accueil</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Article</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Classements</a>
+                      </li>
+                      <!-- Bouton de déconnexion -->
+                      <li class="nav-item">
+                          <a href="/logout" class="btn btn-outline-light me-2">Déconnexion</a>
+                      </li>
+                    <?php
+                    }
+                    ?>
+                <?php
+                } else {
+                ?>
+                    <!-- Liens pour les utilisateurs non connectés -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Classements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="btn btn-outline-light me-2">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/register" class="btn btn-light">Inscription</a>
+                    </li>
+                <?php
                 }
-            } else {
-            ?>
-                
-            <?php
-            }
-            ?>
-        </ul>
+                ?>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="myBody">
+        <!-- Contenu principal -->
     </div>
-</nav>
-<div class="myBody">
+</body>
+
+</html>

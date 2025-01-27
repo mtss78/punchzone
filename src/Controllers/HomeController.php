@@ -14,7 +14,7 @@ class HomeController extends AbstractController
             $arrayArticles = $article->getAllArticles(); // Méthode à définir dans le modèle Article
 
             if ($_SESSION['user']['idRole'] == 1) {
-                $arrayArticlesByUsers = $article->getArticlesByUser($_SESSION['user']['id']); 
+                $arrayArticlesByUsers = $article->getArticlesByUser($_SESSION['user']['idUser']); 
             }
         }
         require_once(__DIR__ . '/../Views/home.view.php');
