@@ -1,6 +1,8 @@
 <?php
 require "vendor/autoload.php";
 session_start();
+
+use App\Controllers\ArticleController;
 use Config\Router;
 
 $router = new Router();
@@ -13,5 +15,9 @@ $router->addRoute('/', 'HomeController', 'index');
 $router->addRoute('/register', 'RegisterController', 'index');
 $router->addRoute('/login', 'LoginController', 'index');
 $router->addRoute('/logout', 'LogoutController', 'logout');
+//Le CRUD:
+$router->addRoute('/addArticle', 'ArticleController', 'createArticle');
+$router->addRoute('/Article', 'ArticleController', 'index');
+$router->addRoute('/editArticle', 'ArticleController', 'editArticle');
 
 $router->handleRequest();

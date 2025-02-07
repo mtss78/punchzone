@@ -11,4 +11,4 @@ class ViewArticleController extends AbstractController {
 }
 
 
-require_once (__DIR__ . '/../Views/viewTask.view.php');
+require_once (__DIR__ . '/../Views/article.view.php');

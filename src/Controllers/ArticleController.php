@@ -4,27 +4,38 @@ namespace App\Controllers;
 
 use App\Utils\AbstractController;
 use App\Models\Article;
+use App\Models\User;
 
 class ArticleController extends AbstractController
 {
-    public function index()
+    public function getAllArticles()
     {
-        if ($_GET['id']) {
-            // On récupère l'ID de l'article
-            $idArticle = $_GET['id'];
-            // Instancier un nouvel article avec l'ID
-            $article = new Article($idArticle, null, null, null, null, null);
-            // Récupérer l'article depuis la BDD
+        $articleModel = new Article(null, null, null, null, null, null, null);
+        $articles = $articleModel->getAllArticles();
+        
+        require_once(__DIR__ . '/../Views/article.view.php');
+    }
+
+    public function showArticle()
+    {
+        if (isset($_GET['id'])) {
+            $idArticle = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+            if (!$idArticle) {
+                $this->redirectToRoute('/');
+            }
+
+            $article = new Article($idArticle, null, null, null, null, null, null);
             $myArticle = $article->getArticleById();
 
-            // Si l'article n'existe pas, redirection
             if (!$myArticle) {
                 $this->redirectToRoute('/');
             }
 
-            $creationDate = date_create($myArticle->getDatePublication());
+            $idUser = $myArticle->getIdUser();
+            $user = new User($idUser, null, null, null, null, null);
+            $myUser = $user->getUserById();
 
-            require_once(__DIR__ . "/../Views/article/article.view.php");
+            require_once(__DIR__ . "/../Views/article.view.php");
         } else {
             $this->redirectToRoute('/');
         }
@@ -32,25 +43,26 @@ class ArticleController extends AbstractController
 
     public function createArticle()
     {
-        if (isset($_SESSION['user']) && $_SESSION['user']['idRole'] == 1) {
-            if (isset($_POST['title'])) {
-                $this->check('title', $_POST['title']);
-                $this->check('content', $_POST['content']);
+        if (isset($_SESSION['user']) && $_SESSION['user']['id_role'] == 1) {
+            if (isset($_POST['titre'])) {
+                $this->check('titre', $_POST['titre']);
+                $this->check('contenu', $_POST['contenu']);
 
                 if (empty($this->arrayError)) {
-                    $title = htmlspecialchars($_POST['title']);
-                    $content = htmlspecialchars($_POST['content']);
-                    $creation_date = date('Y-m-d H:i:s');
-                    $id_user = $_SESSION['user']['idUser'];
+                    $titre = htmlspecialchars($_POST['titre']);
+                    $contenu = htmlspecialchars($_POST['contenu']);
+                    $auteur = $_SESSION['user']['username'];
+                    $image = htmlspecialchars($_POST['image'] ?? '');
+                    $date_publication = date('Y-m-d');
+                    $id_user = $_SESSION['user']['id_user'];
 
-                    $article = new Article(null, $title, $content, $creation_date, $id_user, null);
-
+                    $article = new Article(null, $titre, $auteur, $contenu, $image, $date_publication, $id_user);
                     $article->addArticle();
+
                     $this->redirectToRoute('/');
                 }
             }
-
-            require_once(__DIR__ . '/../Views/article/createArticle.view.php');
+            require_once(__DIR__ . '/../Views/createArticle.view.php');
         } else {
             $this->redirectToRoute('/');
         }
@@ -58,35 +70,36 @@ class ArticleController extends AbstractController
 
     public function editArticle()
     {
-        if ($_GET['id']) {
-            // On récupère l'ID de l'article
-            $idArticle = $_GET['id'];
-            // Instancier un nouvel article avec l'ID
-            $article = new Article($idArticle, null, null, null, null, null);
-            // Récupérer l'article depuis la BDD
+        if (isset($_GET['id'])) {
+            $idArticle = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+            if (!$idArticle) {
+                $this->redirectToRoute('/');
+            }
+
+            $article = new Article($idArticle, null, null, null, null, null, null);
             $myArticle = $article->getArticleById();
 
-            // Si l'article n'existe pas, redirection
             if (!$myArticle) {
                 $this->redirectToRoute('/');
             }
 
-            if (isset($_POST['title'])) {
-                $this->check('title', $_POST['title']);
-                $this->check('content', $_POST['content']);
+            if (isset($_POST['titre'])) {
+                $this->check('titre', $_POST['titre']);
+                $this->check('contenu', $_POST['contenu']);
 
                 if (empty($this->arrayError)) {
-                    $title = htmlspecialchars($_POST['title']);
-                    $content = htmlspecialchars($_POST['content']);
+                    $titre = htmlspecialchars($_POST['titre']);
+                    $contenu = htmlspecialchars($_POST['contenu']);
+                    $image = htmlspecialchars($_POST['image'] ?? '');
 
-                    $article = new Article($idArticle, $title, $content, null, null, null);
-
+                    $article = new Article($idArticle, $titre, $myArticle->getAuteur(), $contenu, $image, null, null);
                     $article->updateArticle();
+
                     $this->redirectToRoute('/');
                 }
             }
 
-            require_once(__DIR__ . '/../Views/article/editArticle.view.php');
+            require_once(__DIR__ . '/../Views/editArticle.view.php');
         } else {
             $this->redirectToRoute('/');
         }
@@ -95,9 +108,11 @@ class ArticleController extends AbstractController
     public function deleteArticle()
     {
         if (isset($_POST['id'])) {
-            $idArticle = htmlspecialchars($_POST['id']);
-            $article = new Article($idArticle, null, null, null, null, null);
-            $article->deleteArticle();
+            $idArticle = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+            if ($idArticle) {
+                $article = new Article($idArticle, null, null, null, null, null, null);
+                $article->deleteArticle();
+            }
             $this->redirectToRoute('/');
         }
     }
