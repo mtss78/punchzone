@@ -28,7 +28,7 @@
                 ?>
                     <!-- Liens pour les utilisateurs connectés -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Accueil</a>
+                        <a class="nav-link" href="/">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Article</a>
@@ -46,10 +46,10 @@
                     if ($_SESSION['user']['idRole'] == "Admin") {
                     ?>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">Accueil</a>
+                          <a class="nav-link" href="/">Accueil</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">Article</a>
+                          <a class="nav-link" href="/addArticle">Créer un article</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="#">Classements</a>
@@ -88,7 +88,6 @@
     </nav>
 
     <div class="myBody">
-        <!-- Contenu principal -->
     </div>
 </body>
 
