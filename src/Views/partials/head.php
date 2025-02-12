@@ -22,73 +22,66 @@
 
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <?php
-                if (isset($_SESSION['user'])) {
-                ?>
-                    <!-- Liens pour les utilisateurs connectés -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Article</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Classements</a>
-                    </li>
-                    <!-- Bouton de déconnexion -->
-                    <li class="nav-item">
-                        <a href="/logout" class="btn btn-outline-light me-2">Déconnexion</a>
-                    </li>
+    <ul class="navbar-nav ms-auto">
+        <?php
+        if (isset($_SESSION['user'])) {
+        ?>
+            <!-- Liens pour tous les utilisateurs connectés -->
+            <li class="nav-item">
+                <a class="nav-link" href="/">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/article">Article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Classements</a>
+            </li>
 
-                    <!-- Vérification du rôle Admin -->
-                    <?php
-                    if ($_SESSION['user']['idRole'] == "Admin") {
-                    ?>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/">Accueil</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/addArticle">Créer un article</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="#">Classements</a>
-                      </li>
-                      <!-- Bouton de déconnexion -->
-                      <li class="nav-item">
-                          <a href="/logout" class="btn btn-outline-light me-2">Déconnexion</a>
-                      </li>
-                    <?php
-                    }
-                    ?>
-                <?php
-                } else {
-                ?>
-                    <!-- Liens pour les utilisateurs non connectés -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Article</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Classements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/login" class="btn btn-outline-light me-2">Connexion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/register" class="btn btn-light">Inscription</a>
-                    </li>
-                <?php
-                }
-                ?>
-            </ul>
-        </div>
-    </nav>
+            <?php
+            // Vérification du rôle Admin
+            if ($_SESSION['user']['id_role'] == 1) {
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/addArticle">Créer un article</a>
+                </li>
+            <?php
+            }
+            ?>
 
-    <div class="myBody">
-    </div>
+            <!-- Bouton de déconnexion -->
+            <li class="nav-item">
+                <a href="/logout" class="btn btn-outline-light me-2">Déconnexion</a>
+            </li>
+
+        <?php
+        } else {
+        ?>
+            <!-- Liens pour les utilisateurs non connectés -->
+            <li class="nav-item">
+                <a class="nav-link" href="/">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Classements</a>
+            </li>
+            <li class="nav-item">
+                <a href="/login" class="btn btn-outline-light me-2">Connexion</a>
+            </li>
+            <li class="nav-item">
+                <a href="/register" class="btn btn-light">Inscription</a>
+            </li>
+        <?php
+        }
+        ?>
+    </ul>
+</div>
+</nav>
+
+<div class="myBody">
+</div>
+
 </body>
 
 </html>

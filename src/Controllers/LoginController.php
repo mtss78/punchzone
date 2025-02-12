@@ -27,8 +27,8 @@ class LoginController extends AbstractController
                             'id' => uniqid(),
                             'mail' => $responseGetUser->getMail(),
                             'pseudo' => $responseGetUser->getPseudo(),
-                            'idUser' => $responseGetUser->getId(),
-                            'idRole' => $responseGetUser->getId_role()
+                            'id_user' => $responseGetUser->getId(),
+                            'id_role' => $responseGetUser->getId_role()
                         ];
                         $this->redirectToRoute('/');
                     } else {

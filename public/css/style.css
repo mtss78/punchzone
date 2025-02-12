@@ -203,6 +203,138 @@ body {
   }
 }
 
+/* articles views */
+/* Conteneur principal */
+.conteneur {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.espace-haut {
+  margin-top: 40px;
+}
+
+.espace-haut-moyen {
+  margin-top: 30px;
+}
+
+/* Titre centré */
+.titre-centre {
+  text-align: center;
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Ligne contenant les cartes */
+.ligne {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Carte */
+.colonne-moyenne-4 {
+  width: 24%;
+  box-sizing: border-box;
+}
+
+/* Carte spécifique */
+.carte {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.carte:hover {
+  transform: translateY(-5px);
+}
+
+/* Image de la carte */
+.carte-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Corps de la carte */
+.carte-corps {
+  padding: 15px;
+}
+
+/* Titre de la carte */
+.carte-titre {
+  font-size: 1.6em;
+  color: #333;
+  margin: 0;
+}
+
+/* Texte de la carte */
+.carte-texte {
+  font-size: 1em;
+  color: #666;
+  margin: 10px 0;
+}
+
+/* Texte secondaire */
+.texte-secondaire {
+  font-size: 0.9em;
+  color: #999;
+  margin: 10px 0;
+}
+
+/* Boutons */
+.bouton {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.bouton-principal {
+  background-color: #007bff;
+  color: white;
+}
+
+.bouton-principal:hover {
+  background-color: #0056b3;
+}
+
+.bouton-avertissement {
+  background-color: #ffc107;
+  color: white;
+}
+
+.bouton-avertissement:hover {
+  background-color: #e0a800;
+}
+
+.bouton-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.bouton-danger:hover {
+  background-color: #c82333;
+}
+
+/* Formulaire de suppression */
+.formulaire-ligne {
+  display: inline-block;
+  margin: 0;
+}
+
+.texte-centre {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+}
 
 
 
