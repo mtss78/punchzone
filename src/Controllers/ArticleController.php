@@ -8,39 +8,26 @@ use App\Models\User;
 
 class ArticleController extends AbstractController
 {
-    public function getAllArticles()
+
+    public function index()
     {
-        $articleModel = new Article(null, null, null, null, null, null, null);
-        $articles = $articleModel->getAllArticles();
+        // Création d'une instance de la classe Article
+        $article = new Article(null, null, null, null, null, null, null);
         
-        require_once(__DIR__ . '/../Views/article.view.php');
-    }
-
-    public function showArticle()
-    {
-        if (isset($_GET['id'])) {
-            $idArticle = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-            if (!$idArticle) {
-                $this->redirectToRoute('/');
-            }
-
-            $article = new Article($idArticle, null, null, null, null, null, null);
-            $myArticle = $article->getArticleById();
-
-            if (!$myArticle) {
-                $this->redirectToRoute('/');
-            }
-
-            $idUser = $myArticle->getIdUser();
-            $user = new User($idUser, null, null, null, null, null);
-            $myUser = $user->getUserById();
-
-            require_once(__DIR__ . "/../Views/article.view.php");
-        } else {
+        // Récupération de tous les articles
+        $allArticles = $article->getAllArticles();
+    
+        // Vérification si aucun article n'est trouvé
+        if (!$allArticles) {
+            $_SESSION['error'] = "Aucun article trouvé.";
             $this->redirectToRoute('/');
+            exit;
         }
+    
+        // Inclusion de la vue pour afficher les articles
+        require_once(__DIR__ . "/../Views/article/article.view.php");
     }
-
+    
     public function createArticle()
     {
         if (isset($_SESSION['user']) && $_SESSION['user']['id_role'] == 1) {
@@ -50,8 +37,9 @@ class ArticleController extends AbstractController
 
                 if (empty($this->arrayError)) {
                     $titre = htmlspecialchars($_POST['titre']);
+                    $auteur = $_SESSION['user']['pseudo'];
                     $contenu = htmlspecialchars($_POST['contenu']);
-                    $auteur = $_SESSION['user']['username'];
+
                     $image = htmlspecialchars($_POST['image'] ?? '');
                     $date_publication = date('Y-m-d');
                     $id_user = $_SESSION['user']['id_user'];
@@ -62,7 +50,7 @@ class ArticleController extends AbstractController
                     $this->redirectToRoute('/');
                 }
             }
-            require_once(__DIR__ . '/../Views/createArticle.view.php');
+            require_once(__DIR__ . "/../Views/article/createArticle.view.php");
         } else {
             $this->redirectToRoute('/');
         }
@@ -72,18 +60,22 @@ class ArticleController extends AbstractController
     {
         if (isset($_GET['id'])) {
             $idArticle = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
             if (!$idArticle) {
                 $this->redirectToRoute('/');
+                exit;
             }
 
             $article = new Article($idArticle, null, null, null, null, null, null);
             $myArticle = $article->getArticleById();
 
             if (!$myArticle) {
+                $_SESSION['error'] = "L'article n'existe pas.";
                 $this->redirectToRoute('/');
+                exit;
             }
 
-            if (isset($_POST['titre'])) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->check('titre', $_POST['titre']);
                 $this->check('contenu', $_POST['contenu']);
 
@@ -92,18 +84,31 @@ class ArticleController extends AbstractController
                     $contenu = htmlspecialchars($_POST['contenu']);
                     $image = htmlspecialchars($_POST['image'] ?? '');
 
-                    $article = new Article($idArticle, $titre, $myArticle->getAuteur(), $contenu, $image, null, null);
-                    $article->updateArticle();
+                    $article = new Article(
+                        $idArticle,
+                        $titre,
+                        $myArticle->getAuteur(),
+                        $contenu,
+                        $image,
+                        $myArticle->getDatePublication(),
+                        $myArticle->getIdUser()
+                    );
 
+                    $article->updateArticle();
+                    $_SESSION['success'] = "L'article a été mis à jour avec succès.";
                     $this->redirectToRoute('/');
+                    exit;
                 }
             }
 
-            require_once(__DIR__ . '/../Views/editArticle.view.php');
+            require_once(__DIR__ . "/../Views/article/editArticle.view.php");
         } else {
+            $_SESSION['error'] = "ID d'article invalide.";
             $this->redirectToRoute('/');
+            exit;
         }
     }
+
 
     public function deleteArticle()
     {

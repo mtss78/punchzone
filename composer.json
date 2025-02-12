@@ -1,5 +1,5 @@
 {
-    "name": "edw_2425/todolist",
+    "name": "edw_2425/punchzone1",
     "autoload": {
         "psr-4": {
             "App\\": "src/",

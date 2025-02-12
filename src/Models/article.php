@@ -34,15 +34,28 @@ class Article
         return $statement->execute([$this->titre, $this->auteur, $this->contenu, $this->image, $this->date_publication, $this->id_user]);
     }
 
-    public function getAllArticles()
-    {
-        $db = Database::getConnection();
-        $query = "SELECT * FROM article ORDER BY date_publication DESC";
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+public function getAllArticles()
+{
+    $db = Database::getConnection();
+    $stmt = $db->prepare("SELECT * FROM article ORDER BY date_publication DESC");
+    $stmt->execute();
+    $articlesData = $stmt->fetchAll(PDO::FETCH_ASSOC); // Vérifie si ça retourne un tableau associatif
+
+    $articles = [];
+    foreach ($articlesData as $article) {
+        $articles[] = new Article(
+            $article['id'],
+            $article['titre'],
+            $article['auteur'],
+            $article['contenu'],
+            $article['image'],
+            $article['date_publication'],
+            $article['id_user']
+        );
     }
+
+    return $articles; // Retourne un tableau d'objets Article
+}
 
     public function getArticleById()
     {
