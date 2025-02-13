@@ -109,6 +109,16 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
     </div>
     </div>
 </section>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classements des Combattants UFC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
 <?php
 require_once(__DIR__ . "/partials/footer.php");
 ?>
