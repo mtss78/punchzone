@@ -28,6 +28,26 @@ class ArticleController extends AbstractController
         require_once(__DIR__ . "/../Views/article/article.view.php");
     }
     
+    public function detailArticle()
+    {
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            $this->redirectToRoute('/article');
+            return;
+        }
+    
+        $articleId = intval($_GET['id']);
+        $articleModel = new Article($articleId, null, null, null, null, null, null);
+        $article = $articleModel->getArticleById();
+    
+        if (!$article) {
+            $this->redirectToRoute('/article');
+            return;
+        }
+    
+        require_once(__DIR__ . "/../Views/article/detailArticle.view.php");
+    }
+    
+
     public function createArticle()
     {
         if (isset($_SESSION['user']) && $_SESSION['user']['id_role'] == 1) {

@@ -19,6 +19,7 @@ $router->addRoute('/logout', 'LogoutController', 'logout');
 //Le CRUD:
 $router->addRoute('/addArticle', 'ArticleController', 'createArticle');
 $router->addRoute('/article', 'ArticleController', 'index');
+$router->addRoute('/detailArticle', 'ArticleController', 'detailArticle');
 $router->addRoute('/editArticle', 'ArticleController', 'editArticle');
 $router->addRoute('/deleteArticle', 'ArticleController', 'deleteArticle');
 

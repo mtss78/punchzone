@@ -17,7 +17,7 @@ require_once(__DIR__ . "/../partials/head.php");
                             <h5 class="carte-titre"><?= htmlspecialchars($article->getTitre()); ?></h5>
                             <p class="carte-texte"><?= nl2br(htmlspecialchars(substr($article->getContenu(), 0, 100))) . '...'; ?></p>
                             <p class="texte-secondaire">Par <?= htmlspecialchars($article->getAuteur()); ?> | <?= htmlspecialchars($article->getDatePublication()); ?></p>
-                            <a href="/article?id=<?= $article->getId(); ?>" class="bouton bouton-principal">Lire l'article</a>
+                            <a href="/detailArticle?id=<?= $article->getId(); ?>" class="bouton bouton-principal">Lire l'article</a>
 
                             <?php if (isset($_SESSION['user']) && $_SESSION['user']['id_role'] == 1) { ?>
                                 <a href="/editArticle?id=<?= $article->getId(); ?>" class="bouton bouton-avertissement">Modifier</a>
@@ -35,7 +35,6 @@ require_once(__DIR__ . "/../partials/head.php");
         <?php } ?>
     </div>
 </div>
-
 
 <?php
 require_once(__DIR__ . "/../partials/footer.php");

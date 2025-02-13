@@ -11,7 +11,7 @@
 
 
 
-
+/*page acceuil*/
 body {
   margin:0;
 }
@@ -95,9 +95,6 @@ body {
     font-size:24px;
   }
 }
-
-
-
 
 .contenair_article {
   background: #ffffff;
@@ -307,12 +304,12 @@ body {
 }
 
 .bouton-avertissement {
-  background-color: #ffc107;
+  background-color: #007bff;
   color: white;
 }
 
 .bouton-avertissement:hover {
-  background-color: #e0a800;
+  background-color:  #0056b3;
 }
 
 .bouton-danger {
