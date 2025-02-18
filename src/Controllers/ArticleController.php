@@ -60,11 +60,20 @@ class ArticleController extends AbstractController
                     $auteur = $_SESSION['user']['pseudo'];
                     $contenu = htmlspecialchars($_POST['contenu']);
 
-                    $image = htmlspecialchars($_POST['image'] ?? '');
                     $date_publication = date('Y-m-d');
                     $id_user = $_SESSION['user']['id_user'];
 
-                    $article = new Article(null, $titre, $auteur, $contenu, $image, $date_publication, $id_user);
+                // chemin du dossier ou je stock les images de mes articles
+                $target_dir = "public/img/";
+                //variable qui contient le chemin et concatene le nom de mon image
+                $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                // si mon image a bien été déplacé dans mon dossier voulu je récupere le nom de mon image dans une variable
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                        $img = htmlspecialchars(basename($_FILES["image"]["name"]));
+                        $img_path =  $img;
+                    }
+
+                    $article = new Article(null, $titre, $auteur, $contenu, $img, $date_publication, $id_user);
                     $article->addArticle();
 
                     $this->redirectToRoute('/');

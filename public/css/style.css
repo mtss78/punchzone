@@ -333,6 +333,21 @@ body {
   color: #555;
 }
 
+/* Responsive */
+@media (max-width: 1024px) {
+  .colonne-moyenne-4 {
+      flex: 1 1 calc(50% - 20px); /* 2 colonnes sur tablette */
+      max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .colonne-moyenne-4 {
+      flex: 1 1 100%; /* 1 colonne sur mobile */
+      max-width: 100%;
+  }
+}
+
 
 
 
@@ -353,7 +368,6 @@ form {
   background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
 }

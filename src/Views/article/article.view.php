@@ -11,7 +11,7 @@ require_once(__DIR__ . "/../partials/head.php");
                 <div class="colonne-moyenne-4">
                     <div class="carte marge-bas ombre-legere">
                         <?php if (!empty($article->getImage())) { ?>
-                            <img src="<?= htmlspecialchars($article->getImage()); ?>" class="carte-image" alt="Image de l'article">
+                            <img src="/public/img/<?= $article->getImage()?>" class="carte-image" alt="Image de l'article">
                         <?php } ?>
                         <div class="carte-corps">
                             <h5 class="carte-titre"><?= htmlspecialchars($article->getTitre()); ?></h5>
