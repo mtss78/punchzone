@@ -39,85 +39,76 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
     </div>
     <div class="band">
     <div class="item-1">
-        <a href="#" class="card">
+        <a href="http://localhost:8000/detailArticle?id=16" class="card">
         <div class="thumb" style="background-image: url(/public/img/pfl-abdoul.jpeg);"></div>
         <article>
             <h1>PFL – Abdoul Abdouraguimov fait son grand retour contre Staropoli</h1>
-            <span>Mary Winkler</span>
+            <span>ishowMtss</span>
         </article>
         </a>
     </div>
     <div class="item-2">
-        <a href="#" class="card">
+        <a href="http://localhost:8000/detailArticle?id=23" class="card">
         <div class="thumb" style="background-image: url(/public/img/benoit-saint-denis-tko.jpg);"></div>
         <article>
             <h1>UFC Paris - Benoît Saint-Denis s'incline sur TKO après un arrêt du docteur</h1>
             <p>Benoît Saint Denis s'est incliné face à Renato Moicano sur TKO, lors de l'UFC Paris 3 le 28 septembre 2024. Le combattant français, trop touché aux yeux, a été arrêté par le médecin. </p>
-            <span>Harry Brignull</span>
+            <span>ishowMtss</span>
         </article>
         </a>
     </div>
     <div class="item-3">
-        <a href="#" class="card">
+        <a href="http://localhost:8000/detailArticle?id=17" class="card">
         <div class="thumb" style="background-image: url(/public/img/ufc-paris-morgan-charriere-ko.jpg);"></div>
         <article>
             <h1>UFC Paris - Morgan Charrière claque un énorme KO sur crochet gauche</h1>
             <p> Le Pirate évoluait de nouveau devant son public à Paris. Finalement, Morgan Charrière claque un énorme KO sur un crochet. </p>
-            <span>Melody Nieves</span>
+            <span>ishowMtss</span>
         </article>
         </a>
     </div>
     <div class="item-4">
-        <a href="#" class="card">
-        <div class="thumb" style="background-image: url(/public/img/benoit-saint-denis-forfait.jpg);"></div>
+        <a href="http://localhost:8000/detailArticle?id=21" class="card">
+        <div class="thumb" style="background-image: url(/public/img/Benoit-Saint-Denis-1250x600.jpg);"></div>
         <article>
             <h1>UFC Paris 3 - Benoit Saint-Denis vs. Renato Moicano : tous les résultats</h1>
             <p>Devant leur public, les combattants français de l’UFC auront à cœur de briller comme les années précédentes.</p>
-            <span>Kezz Bracey</span>
+            <span>ishowMtss</span>
         </article>
         </a>
     </div>
     <div class="item-5">
-        <a href="#" class="card">
+        <a href="http://localhost:8000/detailArticle?id=18" class="card">
         <div class="thumb" style="background-image: url(/public/img/makhachev-moicano-premier-round.jpg);"></div>
         <article>
             <h1>UFC 311 – Islam Makhachev roule sur Moicano au premier round</h1>
             <p>Événement principal d’une carte chamboulée. Finalement, Islam Makhachev roule sur Moicano au premier round.</p>
-            <span>Rose</span>
+            <span>ishowMtss</span>
         </article>
         </a>
     </div>
     <div class="item-6">
-        <a href="#" class="card">
-        <div class="thumb" style="background-image: url(/public/img/pereira-ankalaev-ufc-313.jpg);"></div>
+        <a href="http://localhost:8000/detailArticle?id=19" class="card">
+        <div class="thumb" style="background-image: url(/public/img/pereira-ankalaev-1250x600.jpg);"></div>
         <article>
             <h1>Alex Pereira vs Magomed Ankalaev, officialisé pour l’UFC 313</h1>
             <p>Malgré les rumeurs, le choc va avoir lieu. En effet, Alex Pereira vs Magomed Ankalaev est officialisé pour l’UFC 313.</p>
-            <span>Marie Gardiner</span>
+            <span>ishowMtss</span>
         </article>
         </a>
     </div>
     <div class="item-7">
-        <a href="#" class="card">
+        <a href="http://localhost:8000/detailArticle?id=22" class="card">
         <div class="thumb" style="background-image: url(/public//img/dana-white-bellator-pfl.jpeg);"></div>
         <article>
             <h1>L’UFC bientôt diffusé sur Netflix ? Le boss répond</h1>
             <p>Ted Sarandos, co-PDG de Netflix, a laissé place aux doutes concernant une éventuelle arrivée de l’UFC sur la plateforme.</p>
-            <span>Kendra Schaefer</span>
+            <span>ishowMtss</span>
         </article>
         </a>
     </div>
     </div>
 </section>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classements des Combattants UFC</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
 
 <?php
 require_once(__DIR__ . "/partials/footer.php");

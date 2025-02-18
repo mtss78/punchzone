@@ -22,5 +22,6 @@ $router->addRoute('/article', 'ArticleController', 'index');
 $router->addRoute('/detailArticle', 'ArticleController', 'detailArticle');
 $router->addRoute('/editArticle', 'ArticleController', 'editArticle');
 $router->addRoute('/deleteArticle', 'ArticleController', 'deleteArticle');
+$router->addRoute('/addComment', 'CommentController', 'commentArticle');
 
 $router->handleRequest();

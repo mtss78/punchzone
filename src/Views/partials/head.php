@@ -58,15 +58,6 @@
         ?>
             <!-- Liens pour les utilisateurs non connectés -->
             <li class="nav-item">
-                <a class="nav-link" href="/">Accueil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Article</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Classements</a>
-            </li>
-            <li class="nav-item">
                 <a href="/login" class="btn btn-outline-light me-2">Connexion</a>
             </li>
             <li class="nav-item">
