@@ -2,59 +2,68 @@
 
 namespace App\Controllers;
 
-use App\Utils\AbstractController;
 use App\Models\Comment;
+use Config\DataBase;
+use PDO;
 
-class CommentController extends AbstractController
+class CommentController
 {
+    private PDO $pdo;
+
     public function commentArticle()
     {
-        if (!isset($_SESSION['user'])) {
-            $_SESSION['error'] = "Vous devez être connecté pour commenter.";
-            $this->redirectToRoute('/login');
-            return;
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_article'], $_POST['contenu'])) {
-            $this->check('contenu', $_POST['contenu']);
-
-            if (empty($this->arrayError)) {
-                $contenu = htmlspecialchars($_POST['contenu']);
-                $id_article = intval($_POST['id_article']);
-                $user_id = $_SESSION['user']['id_user'];
-
-                $comment = new Comment(null, $contenu, null, $user_id, $id_article);
-                $comment->addComment();
-
-                $_SESSION['success'] = "Commentaire ajouté avec succès.";
-            } else {
-                $_SESSION['error'] = "Le contenu du commentaire est invalide.";
-            }
-        }
-
-        $this->redirectToRoute('/article?id=' . $_POST['id_article']);
+        $this->pdo = DataBase::getConnection();
     }
 
-    public function deleteComment()
+    // Ajouter un commentaire
+    public function addComment($contenu, $date_commentaire, $article_id, $user_id)
     {
-        if (!isset($_SESSION['user'])) {
-            $_SESSION['error'] = "Vous devez être connecté pour supprimer un commentaire.";
-            $this->redirectToRoute('/login');
-            return;
-        }
+        $sql = "INSERT INTO `comment` (`contenu`, `date_commentaire`, `id_article`, `id_user`) 
+                VALUES (:contenu, :date_commentaire, :id_article, :id_user)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            'contenu' => $contenu,
+            'date_commentaire' => $date_commentaire,
+            'id_article' => $article_id,
+            'id_user' => $user_id
+        ]);
+    }
 
-        if (isset($_POST['id'])) {
-            $idComment = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+    // Lire un commentaire par ID
+    public function getCommentById($id)
+    {
+        $sql = "SELECT * FROM `comment` WHERE `id` = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-            if ($idComment) {
-                $comment = new Comment($idComment, null, null, null, null);
-                $comment->deleteComment();
-                $_SESSION['success'] = "Commentaire supprimé avec succès.";
-            } else {
-                $_SESSION['error'] = "ID du commentaire invalide.";
-            }
-        }
+    // Lire tous les commentaires d'un article
+    public function getCommentsByArticle($article_id)
+    {
+        $sql = "SELECT * FROM `comment` WHERE `id_article` = :id_article ORDER BY `date_commentaire` DESC";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id_article' => $article_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-        $this->redirectToRoute('/');
+    // Mettre à jour un commentaire
+    public function updateComment($id, $contenu)
+    {
+        $sql = "UPDATE `comment` SET `contenu` = :contenu WHERE `id` = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            'contenu' => $contenu,
+            'id' => $id
+        ]);
+    }
+
+    // Supprimer un commentaire
+    public function deleteComment($id)
+    {
+        $sql = "DELETE FROM `comment` WHERE `id` = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['id' => $id]);
     }
 }
+?>

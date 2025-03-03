@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/../partials/head.php");
 ?>
 
-<h2>Modifier l'Article</h2>
+<h1>Modifier l'Article</h1>
 
     <?php if (isset($_SESSION['error'])): ?>
         <p style="color: red;"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
@@ -25,7 +25,7 @@ require_once(__DIR__ . "/../partials/head.php");
         <button type="submit">Mettre à jour</button>
     </form>
 
-    <a href="/">Retour à l'accueil</a>
+    <a href="/article" class="bouton bouton-retour">Retour aux articles</a>
 
 <?php
 require_once(__DIR__ . "/../partials/footer.php");

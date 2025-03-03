@@ -9,58 +9,168 @@ class Comment
 {
     protected ?int $id;
     protected ?string $contenu;
-    protected ?string $date_commentaire;
-    protected ?int $id_user;
-    protected ?int $id_article;
+    protected ?string $dateCommentaire;
+    protected ?int $articleId;
+    protected ?int $userId;
 
-    public function commentArticle(?int $id, ?string $contenu, ?string $date_commentaire, ?int $id_user, ?int $id_article)
-    {
+    public function commentArticle(
+        ?int $id,
+        ?string $contenu,
+        ?string $dateCommentaire,
+        ?int $articleId,
+        ?int $userId
+    ) {
         $this->id = $id;
         $this->contenu = $contenu;
-        $this->date_commentaire = $date_commentaire;
-        $this->id_user = $id_user;
-        $this->id_article = $id_article;
+        $this->dateCommentaire = $dateCommentaire;
+        $this->articleId = $articleId;
+        $this->userId = $userId;
     }
 
+    // Ajouter un commentaire
     public function addComment(): bool
     {
-        $pdo = DataBase::getConnection();
-        $sql = "INSERT INTO `commentaires` (`contenu`, `date_commentaire`, `id_user`, `id_article`) VALUES (?, NOW(), ?, ?)";
-        $statement = $pdo->prepare($sql);
-        return $statement->execute([$this->contenu, $this->id_user, $this->id_article]);
+        try {
+            $pdo = DataBase::getConnection();
+            $sql = "INSERT INTO `comment` (`contenu`, `date_commentaire`, `id_article`, `id_user`) 
+                    VALUES (?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([
+                $this->contenu,
+                $this->dateCommentaire,
+                $this->articleId,
+                $this->userId
+            ]);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
+    // Lire un commentaire par ID
+    public static function getCommentById(int $id): ?Comment
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "SELECT * FROM `comment` WHERE `id` = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Comment(
+                $row['id'],
+                $row['contenu'],
+                $row['date_commentaire'],
+                $row['id_article'],
+                $row['id_user']
+            );
+        }
+        return null;
+    }
+
+    // Récupérer tous les commentaires d'un article
+    public static function getCommentsByArticle(int $articleId): array
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "SELECT * FROM `comment` WHERE `id_article` = ? ORDER BY `date_commentaire` DESC";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$articleId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $comments = [];
+        foreach ($rows as $row) {
+            $comments[] = new Comment(
+                $row['id'],
+                $row['contenu'],
+                $row['date_commentaire'],
+                $row['id_article'],
+                $row['id_user']
+            );
+        }
+        return $comments;
+    }
+
+    // Mettre à jour un commentaire
+    public function updateComment(): bool
+    {
+        try {
+            $pdo = DataBase::getConnection();
+            $sql = "UPDATE `comment` SET `contenu` = ? WHERE `id` = ?";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([
+                $this->contenu,
+                $this->id
+            ]);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    // Supprimer un commentaire
     public function deleteComment(): bool
     {
-        $pdo = DataBase::getConnection();
-        $sql = "DELETE FROM `commentaires` WHERE `id` = ?";
-        $statement = $pdo->prepare($sql);
-        return $statement->execute([$this->id]);
+        try {
+            $pdo = DataBase::getConnection();
+            $sql = "DELETE FROM `comment` WHERE `id` = ?";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$this->id]);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
-    public static function getCommentsByArticleId(int $id_article): array
+    // Getters et Setters
+    public function getId(): ?int
     {
-        $pdo = DataBase::getConnection();
-        $sql = "SELECT c.*, u.pseudo AS username FROM `commentaires` c 
-                JOIN `users` u ON c.id_user = u.id 
-                WHERE c.id_article = ? ORDER BY c.date_commentaire DESC";
-        $statement = $pdo->prepare($sql);
-        $statement->execute([$id_article]);
-
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $this->id;
     }
 
-    // Getters
-    public function getId(): ?int { return $this->id; }
-    public function getContenu(): ?string { return $this->contenu; }
-    public function getDateCommentaire(): ?string { return $this->date_commentaire; }
-    public function getIdUser(): ?int { return $this->id_user; }
-    public function getIdArticle(): ?int { return $this->id_article; }
+    public function getContenu(): ?string
+    {
+        return $this->contenu;
+    }
 
-    // Setters
-    public function setId(?int $id): static { $this->id = $id; return $this; }
-    public function setContenu(?string $contenu): static { $this->contenu = $contenu; return $this; }
-    public function setDateCommentaire(?string $date_commentaire): static { $this->date_commentaire = $date_commentaire; return $this; }
-    public function setIdUser(?int $id_user): static { $this->id_user = $id_user; return $this; }
-    public function setIdArticle(?int $id_article): static { $this->id_article = $id_article; return $this; }
+    public function getDateCommentaire(): ?string
+    {
+        return $this->dateCommentaire;
+    }
+
+    public function getArticleId(): ?int
+    {
+        return $this->articleId;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setId(?int $id): static
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setContenu(?string $contenu): static
+    {
+        $this->contenu = $contenu;
+        return $this;
+    }
+
+    public function setDateCommentaire(?string $dateCommentaire): static
+    {
+        $this->dateCommentaire = $dateCommentaire;
+        return $this;
+    }
+
+    public function setArticleId(?int $articleId): static
+    {
+        $this->articleId = $articleId;
+        return $this;
+    }
+
+    public function setUserId(?int $userId): static
+    {
+        $this->userId = $userId;
+        return $this;
+    }
 }

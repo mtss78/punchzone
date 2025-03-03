@@ -10,7 +10,8 @@
           <div class="col-xs-6 col-md-3">
             <h6>Nos pages</h6>
             <ul class="footer-links">
-              <li><a href="/src/Views/home.view.php"></a>Acceuil</li>
+              <li><a href="/"></a>Accueil</li>
+              <li><a href="/Mentionslegales"></a>Conditions génèral d'utilisation</li>
             </ul>
           </div>
         </div>
@@ -21,15 +22,6 @@
           <div class="col-md-8 col-sm-6 col-xs-12">
             <p class="copyright-text">Copyright &copy; 2024 Tous droits réservés. Media created by Mathis
             </p>
-          </div>
-
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <ul class="social-icons">
-              <li><a class="facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="https://x.com/home"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="dribbble" href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
-              <li><a class="linkedin" href="https://fr.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>   
-            </ul>
           </div>
         </div>
       </div>

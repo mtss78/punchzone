@@ -34,7 +34,7 @@
                 <a class="nav-link" href="/article">Article</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Classements</a>
+                <a class="nav-link" href="/ranking">Classements</a>
             </li>
 
             <?php

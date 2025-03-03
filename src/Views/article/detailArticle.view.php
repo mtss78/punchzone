@@ -3,24 +3,24 @@ require_once(__DIR__ . "/../partials/head.php");
 ?>
 
 
-<div class="conteneur espace-haut">
+<div class="bloc-principal marge-sup">
     <?php if (!empty($article)) { ?>
-        <div class="carte-detail ombre-legere">
+        <div class="carte-info ombre-legere-alt">
             <?php if (!empty($article->getImage())) { ?>
-                <img src="/public/img/<?= $article->getImage()?>" class="carte-image-detail" alt="Image de l'article">
+                <img src="/public/img/<?= $article->getImage()?>" class="image-carte-detail" alt="Image de l'article">
             <?php } ?>
-            <div class="carte-corps-detail">
-                <h1 class="carte-titre-detail"><?= htmlspecialchars($article->getTitre()); ?></h1>
-                <p class="texte-secondaire">Par <?= htmlspecialchars($article->getAuteur()); ?> | Publié le <?= htmlspecialchars($article->getDatePublication()); ?></p>
-                <p class="carte-texte-detail"><?= nl2br(htmlspecialchars($article->getContenu())); ?></p>
+            <div class="contenu-carte-detail">
+                <h1 class="titre-carte-detail"><?= htmlspecialchars($article->getTitre()); ?></h1>
+                <p class="texte-annexe">Par <?= htmlspecialchars($article->getAuteur()); ?> | Publié le <?= htmlspecialchars($article->getDatePublication()); ?></p>
+                <p class="description-carte-detail"><?=(htmlspecialchars($article->getContenu())); ?></p>
 
-                <a href="/article" class="bouton bouton-retour">Retour aux articles</a>
+                <a href="/article" class="bouton-action bouton-retour-alt">Retour aux articles</a>
 
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['id_role'] == 1) { ?>
-                    <a href="/editArticle?id=<?= $article->getId(); ?>" class="bouton bouton-avertissement">Modifier</a>
-                    <form action="/deleteArticle" method="POST" class="formulaire-ligne">
+                    <a href="/editArticle?id=<?= $article->getId(); ?>" class="bouton-action bouton-modification">Modifier</a>
+                    <form action="/deleteArticle" method="POST" class="form-rapide">
                         <input type="hidden" name="id" value="<?= $article->getId(); ?>">
-                        <button type="submit" class="bouton bouton-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">Supprimer</button>
+                        <button type="submit" class="bouton-action bouton-suppression" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">Supprimer</button>
                     </form>
                 <?php } ?>
             </div>
@@ -30,42 +30,38 @@ require_once(__DIR__ . "/../partials/head.php");
     <?php } ?>
 </div>
 
-<!-- Vérifier si l'utilisateur est connecté -->
-<?php if (isset($_SESSION['user'])) { ?>
-    <div class="comment-form mt-4">
-        <h4>Ajouter un commentaire</h4>
-        <form action="/addComment" method="POST">
-            <input type="hidden" name="article_id" value="<?= $article->getId(); ?>">
-            <textarea name="contenu" class="form-control" rows="3" required></textarea>
-            <button type="submit" class="btn btn-primary mt-2">Commenter</button>
-        </form>
-    </div>
-<?php } else { ?>
-    <p class="alert alert-warning">Vous devez être connecté pour commenter.</p>
-<?php } ?>
+<div class="bloc-commentaires marge-sup">
+    <h2>Commentaires</h2>
 
-<!-- Affichage des commentaires -->
-<div class="comments mt-5">
-    <h4>Commentaires :</h4>
-    <?php if (!empty($comments)) { ?>
-        <?php foreach ($comments as $comment) { ?>
-            <div class="comment-box border p-3 mb-3">
-                <p><strong><?= htmlspecialchars($comment['username']); ?></strong> 
-                    <small class="text-muted">(<?= date("d/m/Y H:i", strtotime($comment['date_commentaire'])); ?>)</small>
-                </p>
-                <p><?= nl2br(htmlspecialchars($comment['contenu'])); ?></p>
+    <?php if (!empty($commentaires)) { ?>
+        <?php foreach ($commentaires as $commentaire) { ?>
+            <div class="commentaire">
+                <p class="texte-annexe">Par <?= htmlspecialchars($commentaire->getAuteur()); ?> | Le <?= htmlspecialchars($commentaire->getDateCommentaire()); ?></p>
+                <p class="contenu-commentaire"><?= nl2br(htmlspecialchars($commentaire->getContenu())); ?></p>
 
-                <!-- Bouton Supprimer (si l'utilisateur est l'auteur du commentaire) -->
-                <?php if (isset($_SESSION['user']) && $_SESSION['user']['id_user'] == $comment['id_user']) { ?>
-                    <form action="/deleteComment" method="POST" class="mt-2">
-                        <input type="hidden" name="comment_id" value="<?= $comment['id']; ?>">
-                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                <?php if (isset($_SESSION['user']) && ($_SESSION['user']['id'] == $commentaire->getUserId() || $_SESSION['user']['id_role'] == 1)) { ?>
+                    <form action="/deleteComment" method="POST" class="form-rapide">
+                        <input type="hidden" name="id" value="<?= $commentaire->getId(); ?>">
+                        <button type="submit" class="bouton-action bouton-suppression" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">Supprimer</button>
                     </form>
                 <?php } ?>
             </div>
         <?php } ?>
     <?php } else { ?>
-        <p>Aucun commentaire pour le moment.</p>
+        <p class="texte-centre">Aucun commentaire pour cet article.</p>
+    <?php } ?>
+
+    <?php if (isset($_SESSION['user'])) { ?>
+        <div class="ajout-commentaire">
+            <h3>Ajouter un commentaire</h3>
+            <form action="/article" method="POST">
+                <input type="hidden" name="article_id" value="<?= $article->getId(); ?>">
+                <textarea name="contenu" class="form-control" rows="4" placeholder="Votre commentaire..." required></textarea>
+                <button type="submit" class="bouton-action bouton-ajout">Publier</button>
+            </form>
+        </div>
+    <?php } else { ?>
+        <p class="texte-centre">Vous devez être connecté pour commenter.</p>
     <?php } ?>
 </div>
 
