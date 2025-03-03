@@ -23,5 +23,10 @@ $router->addRoute('/detailArticle', 'ArticleController', 'detailArticle');
 $router->addRoute('/editArticle', 'ArticleController', 'editArticle');
 $router->addRoute('/deleteArticle', 'ArticleController', 'deleteArticle');
 $router->addRoute('/addComment', 'CommentController', 'commentArticle');
+$router->addRoute('/deleteComment', 'CommentController', 'commentArticle');
+
+$router->addRoute('/ranking', 'RankingController', 'index');
+$router->addRoute('/Mentionslegales', 'MentionslegalesController', 'index');
+
 
 $router->handleRequest();
