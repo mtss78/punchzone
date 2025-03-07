@@ -36,6 +36,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/ranking">Classements</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Contacteznous">Contact</a>
+            </li>
 
             <?php
             // Vérification du rôle Admin
@@ -56,6 +59,18 @@
         <?php
         } else {
         ?>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/article">Article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/ranking">Classements</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Contacteznous">Contact</a>
+            </li>
             <!-- Liens pour les utilisateurs non connectés -->
             <li class="nav-item">
                 <a href="/login" class="btn btn-outline-light me-2">Connexion</a>

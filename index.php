@@ -27,6 +27,8 @@ $router->addRoute('/deleteComment', 'CommentController', 'commentArticle');
 
 $router->addRoute('/ranking', 'RankingController', 'index');
 $router->addRoute('/Mentionslegales', 'MentionslegalesController', 'index');
+$router->addRoute('/Contacteznous', 'ContactController', 'index');
+
 
 
 $router->handleRequest();

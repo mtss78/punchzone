@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Utils\AbstractController;
 use App\Models\Article;
-use App\Models\User;
+use App\Models\Comment;
 
 class ArticleController extends AbstractController
 {
@@ -44,8 +44,45 @@ class ArticleController extends AbstractController
             return;
         }
     
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+            if (isset($_POST['contenu'], $_SESSION['user']) && !empty($_POST['contenu'])) {
+                $commentaire = trim($_POST['contenu']);
+                $id_user = $_SESSION['user']['id_user'];
+                $date_creation = date('Y-m-d');
+                $comments = new Comment(null, $commentaire, $date_creation, $articleId, $id_user);
+                $comments->addComment();
+    
+                header('Location: /detailArticle?id=' . $articleId);
+                exit();
+            }
+    
+            if (isset($_POST['idupdate'], $_POST['contenu_update'], $_SESSION['user']) && !empty($_POST['contenu_update'])) {
+                $idcomment = intval($_POST['idupdate']);
+                $commentaire = trim($_POST['contenu_update']);
+                $comments = new Comment($idcomment, $commentaire, null, null, null);
+                $comments->updateComment();
+    
+                header('Location: /detailArticle?id=' . $articleId);
+                exit();
+            }
+    
+            if (isset($_POST['iddelete'], $_SESSION['user'])) {
+                $idcomment = intval($_POST['iddelete']);
+                $comments = new Comment($idcomment, null, null, null, null);
+                $comments->deleteComment();
+    
+                header('Location: /detailArticle?id=' . $articleId);
+                exit();
+            }
+        }
+    
+        $comment = new Comment(null, null, null, null, $articleId, null);
+        $commentsaffichage = $comment->getCommentsByArticle($articleId);
+    
         require_once(__DIR__ . "/../Views/article/detailArticle.view.php");
     }
+    
     
 
     public function createArticle()
