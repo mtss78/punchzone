@@ -39,7 +39,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
     </div>
     <div class="band">
     <div class="item-1">
-        <a href="http://localhost:8000/detailArticle?id=16" class="card">
+        <a href="/detailArticle?id=16" class="card">
         <div class="thumb" style="background-image: url(/public/img/pfl-abdoul.jpeg);"></div>
         <article>
             <h1>PFL – Abdoul Abdouraguimov fait son grand retour contre Staropoli</h1>
@@ -48,7 +48,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         </a>
     </div>
     <div class="item-2">
-        <a href="http://localhost:8000/detailArticle?id=23" class="card">
+        <a href="/detailArticle?id=23" class="card">
         <div class="thumb" style="background-image: url(/public/img/benoit-saint-denis-tko.jpg);"></div>
         <article>
             <h1>UFC Paris - Benoît Saint-Denis s'incline sur TKO après un arrêt du docteur</h1>
@@ -58,7 +58,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         </a>
     </div>
     <div class="item-3">
-        <a href="http://localhost:8000/detailArticle?id=17" class="card">
+        <a href="/detailArticle?id=30" class="card">
         <div class="thumb" style="background-image: url(/public/img/ufc-paris-morgan-charriere-ko.jpg);"></div>
         <article>
             <h1>UFC Paris - Morgan Charrière claque un énorme KO sur crochet gauche</h1>
@@ -68,7 +68,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         </a>
     </div>
     <div class="item-4">
-        <a href="http://localhost:8000/detailArticle?id=21" class="card">
+        <a href="/detailArticle?id=21" class="card">
         <div class="thumb" style="background-image: url(/public/img/Benoit-Saint-Denis-1250x600.jpg);"></div>
         <article>
             <h1>UFC Paris 3 - Benoit Saint-Denis vs. Renato Moicano : tous les résultats</h1>
@@ -78,7 +78,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         </a>
     </div>
     <div class="item-5">
-        <a href="http://localhost:8000/detailArticle?id=18" class="card">
+        <a href="/detailArticle?id=18" class="card">
         <div class="thumb" style="background-image: url(/public/img/makhachev-moicano-premier-round.jpg);"></div>
         <article>
             <h1>UFC 311 – Islam Makhachev roule sur Moicano au premier round</h1>
@@ -88,7 +88,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         </a>
     </div>
     <div class="item-6">
-        <a href="http://localhost:8000/detailArticle?id=19" class="card">
+        <a href="/detailArticle?id=19" class="card">
         <div class="thumb" style="background-image: url(/public/img/pereira-ankalaev-1250x600.jpg);"></div>
         <article>
             <h1>Alex Pereira vs Magomed Ankalaev, officialisé pour l’UFC 313</h1>
@@ -98,7 +98,7 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         </a>
     </div>
     <div class="item-7">
-        <a href="http://localhost:8000/detailArticle?id=22" class="card">
+        <a href="/detailArticle?id=22" class="card">
         <div class="thumb" style="background-image: url(/public//img/dana-white-bellator-pfl.jpeg);"></div>
         <article>
             <h1>L’UFC bientôt diffusé sur Netflix ? Le boss répond</h1>
@@ -209,7 +209,6 @@ viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         <a  href="/ranking">Voir les Classements</a>
     </div>
 </div>
-
 
 <?php
 require_once(__DIR__ . "/partials/footer.php");

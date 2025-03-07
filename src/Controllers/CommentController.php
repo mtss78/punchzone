@@ -5,12 +5,13 @@ namespace App\Controllers;
 use App\Models\Comment;
 use Config\DataBase;
 use PDO;
+use PDOException;
 
 class CommentController
 {
     private PDO $pdo;
 
-    public function commentArticle()
+    public function __construct()
     {
         $this->pdo = DataBase::getConnection();
     }
@@ -18,15 +19,20 @@ class CommentController
     // Ajouter un commentaire
     public function addComment($contenu, $date_commentaire, $article_id, $user_id)
     {
-        $sql = "INSERT INTO `comment` (`contenu`, `date_commentaire`, `id_article`, `id_user`) 
-                VALUES (:contenu, :date_commentaire, :id_article, :id_user)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            'contenu' => $contenu,
-            'date_commentaire' => $date_commentaire,
-            'id_article' => $article_id,
-            'id_user' => $user_id
-        ]);
+        try {
+            $sql = "INSERT INTO `comment` (`contenu`, `date_commentaire`, `article_id`, `user_id`) 
+                    VALUES (:contenu, :date_commentaire, :article_id, :user_id)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                'contenu' => $contenu,
+                'date_commentaire' => $date_commentaire,
+                'article_id' => $article_id,
+                'user_id' => $user_id
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            die("Erreur SQL : " . $e->getMessage());
+        }
     }
 
     // Lire un commentaire par ID
@@ -41,9 +47,9 @@ class CommentController
     // Lire tous les commentaires d'un article
     public function getCommentsByArticle($article_id)
     {
-        $sql = "SELECT * FROM `comment` WHERE `id_article` = :id_article ORDER BY `date_commentaire` DESC";
+        $sql = "SELECT * FROM `comment` WHERE `article_id` = :article_id ORDER BY `date_commentaire` DESC";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['id_article' => $article_id]);
+        $stmt->execute(['article_id' => $article_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -66,4 +72,3 @@ class CommentController
         return $stmt->execute(['id' => $id]);
     }
 }
-?>
